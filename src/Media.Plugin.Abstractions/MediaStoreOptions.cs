@@ -69,6 +69,10 @@ namespace Plugin.Media.Abstractions
     /// </summary>
     public class PickMediaOptions
     {
+		/// <summary>
+		/// Gets or sets a flag to bypass all built in compression/rotation
+		/// </summary>
+		public bool RawFile { get; set; }
 
         /// <summary>
         /// Gets or sets the size of the photo.
@@ -124,7 +128,12 @@ namespace Plugin.Media.Abstractions
     /// </summary>
     public class StoreCameraMediaOptions
         : StoreMediaOptions
-    {
+	{
+		/// <summary>
+		/// Gets or sets a flag to bypass all built in compression/rotation
+		/// </summary>
+		public bool RawFile { get; set; }
+
         /// <summary>
         /// Allow cropping on photos and trimming on videos
         /// If null will use default

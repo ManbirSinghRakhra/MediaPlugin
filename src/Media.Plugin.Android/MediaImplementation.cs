@@ -86,7 +86,7 @@ namespace Plugin.Media
             {
                 try
                 {
-                    await FixOrientationAndResizeAsync(media.Path, options.PhotoSize, options.CompressionQuality, options.CustomPhotoSize);
+					await FixOrientationAndResizeAsync(media.Path, options.PhotoSize, options.CompressionQuality, options.CustomPhotoSize, options.RawFile);
                 }
                 catch (Exception ex)
                 {
@@ -172,7 +172,7 @@ namespace Plugin.Media
 
             try
             {
-                await FixOrientationAndResizeAsync(media.Path, options.PhotoSize, options.CompressionQuality, options.CustomPhotoSize);
+				await FixOrientationAndResizeAsync(media.Path, options.PhotoSize, options.CompressionQuality, options.CustomPhotoSize, options.RawFile);
             }
             catch(Exception ex)
             {
@@ -350,10 +350,13 @@ namespace Plugin.Media
         /// <param name="filePath">The file image path</param>
         /// <param name="photoSize">Photo size to go to.</param>
         /// <returns>True if rotation or compression occured, else false</returns>
-        public Task<bool> FixOrientationAndResizeAsync(string filePath, PhotoSize photoSize, int quality, int customPhotoSize)
+        public Task<bool> FixOrientationAndResizeAsync(string filePath, PhotoSize photoSize, int quality, int customPhotoSize, bool rawFile)
         {
             if (string.IsNullOrWhiteSpace(filePath))
                 return Task.FromResult(false);
+
+			if (rawFile)
+				return Task.FromResult(true);
 
             try
             {
