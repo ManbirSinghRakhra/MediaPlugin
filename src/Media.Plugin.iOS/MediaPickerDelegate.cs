@@ -384,7 +384,7 @@ namespace Plugin.Media
                     try
                     {
                         var library = new ALAssetsLibrary();
-                        var albumSave = await library.WriteImageToSavedPhotosAlbumAsync(cgImage, meta);
+                        var albumSave = await library.WriteImageToSavedPhotosAlbumAsync(cgImage, meta ?? new NSDictionary());
                         aPath = albumSave.AbsoluteString;
                     }
                     catch (Exception ex)
