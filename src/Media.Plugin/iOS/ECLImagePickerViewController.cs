@@ -209,10 +209,10 @@ namespace Plugin.Media
 			NSDictionary meta = null;
 			try
 			{
-				//meta = PhotoLibraryAccess.GetPhotoLibraryMetadata(asset.AssetUrl);
+				meta = PhotoLibraryAccess.GetPhotoLibraryMetadata(asset.AssetUrl);
 
 				//meta = info[UIImagePickerController.MediaMetadata] as NSDictionary;
-				if (meta != null && meta.ContainsKey(ImageIO.CGImageProperties.Orientation))
+				/*if (meta != null && meta.ContainsKey(ImageIO.CGImageProperties.Orientation))
 				{
 					var newMeta = new NSMutableDictionary();
 					newMeta.SetValuesForKeysWithDictionary(meta);
@@ -227,7 +227,7 @@ namespace Plugin.Media
 				if (meta != null && location != null)
 				{
 					meta = MediaPickerDelegate.SetGpsLocation(meta, location);
-				}
+				}*/
 			}
 			catch (Exception ex)
 			{
