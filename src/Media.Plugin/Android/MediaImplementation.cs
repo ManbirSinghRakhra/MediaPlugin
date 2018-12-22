@@ -244,17 +244,15 @@ namespace Plugin.Media
 			}
 
 			//check to see if we need to rotate if success
-
-
 			try
 			{
 				if (options.FindLocation != null)
 					options.Location = await options.FindLocation?.Invoke();
 
 				var exif = new ExifInterface(media.Path);
-				ExifInterface exif1 = null;
+				ExifInterface exifAlbum = null;
 				if (options.SaveToAlbum)
-					exif1 = new ExifInterface(media.AlbumPath);
+					exifAlbum = new ExifInterface(media.AlbumPath);
 
 				if (options.RotateImage)
 				{
@@ -269,12 +267,12 @@ namespace Plugin.Media
 				{
 					SetMissingMetadata(exif, options.Location);
 					if (options.SaveToAlbum)
-						SetMissingMetadata(exif1, options.Location);
+						SetMissingMetadata(exifAlbum, options.Location);
 
 					try
 					{
 						exif?.SaveAttributes();
-						exif1?.SaveAttributes();
+						exifAlbum?.SaveAttributes();
 					}
 					catch (Exception ex)
 					{
@@ -283,6 +281,7 @@ namespace Plugin.Media
 				}
 
 				exif?.Dispose();
+				exifAlbum?.Dispose();
 			}
 			catch (Exception ex)
 			{

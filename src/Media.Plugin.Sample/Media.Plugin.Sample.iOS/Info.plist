@@ -35,10 +35,10 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We need access to the photo library</string>
+	<string>We need read-access to the photo library</string>
 	<key>NSCameraUsageDescription</key>
 	<string>We need to be able to take photos</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>We need access to the photo library for add.</string>
+	<string>We need write-access to the photo library so we can add images.</string>
 </dict>
 </plist>
