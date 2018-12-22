@@ -1,10 +1,6 @@
 ﻿using Plugin.Media;
 using Plugin.Media.Abstractions;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -30,8 +26,9 @@ namespace Media.Plugin.Sample
 				var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
 				{
 					PhotoSize = PhotoSize.Medium,
-					Directory = "Sample",
-					Name = "test.jpg"
+					SaveToAlbum = true,
+					SaveMetaData = true,
+					LocationAction = LocationAction
 				});
 
 				if (file == null)
@@ -129,6 +126,11 @@ namespace Media.Plugin.Sample
 				DisplayAlert("Video Selected", "Location: " + file.Path, "OK");
 				file.Dispose();
 			};
+		}
+
+		private Location LocationAction()
+		{
+			return new Location() { Longitude = 22, Latitude = 135 };
 		}
 	}
 }
