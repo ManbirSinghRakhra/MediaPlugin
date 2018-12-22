@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Plugin.Media.Abstractions
 {
@@ -267,7 +268,7 @@ namespace Plugin.Media.Abstractions
 		/// </summary>
 		public Location Location { get; set; }
 
-		public Func<Location> LocationAction { get; set; }
+		public Func<Task<Location>> FindLocation { get; set; }
 
 		bool rotateImage = true;
 		/// <summary>

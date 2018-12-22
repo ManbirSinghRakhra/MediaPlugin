@@ -1,7 +1,7 @@
 ﻿using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -28,7 +28,8 @@ namespace Media.Plugin.Sample
 					PhotoSize = PhotoSize.Medium,
 					SaveToAlbum = true,
 					SaveMetaData = true,
-					LocationAction = LocationAction
+					//Location = new Location() { Longitude = 22, Latitude = 136 }
+					FindLocation = LocationAction
 				});
 
 				if (file == null)
@@ -128,9 +129,10 @@ namespace Media.Plugin.Sample
 			};
 		}
 
-		private Location LocationAction()
+		private async Task<Location> LocationAction()
 		{
-			return new Location() { Longitude = 22, Latitude = 135 };
+			await Task.Yield();
+			return new Location() { Latitude = 120, Longitude = 25 };
 		}
 	}
 }

@@ -1,19 +1,17 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
-
-using Plugin.Media.Abstractions;
-
-using CoreGraphics;
 using AssetsLibrary;
+using CoreGraphics;
 using Foundation;
-using UIKit;
-using NSAction = global::System.Action;
-using System.Globalization;
 using ImageIO;
 using MobileCoreServices;
-using System.Drawing;
+using Plugin.Media.Abstractions;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Threading.Tasks;
+using UIKit;
+using NSAction = global::System.Action;
 
 namespace Plugin.Media
 {
@@ -39,7 +37,7 @@ namespace Plugin.Media
 		}
 
 		public UIView View => viewController.View;
-		
+
 		public Task<List<MediaFile>> Task => tcs.Task;
 
 		public override async void FinishedPickingMedia(UIImagePickerController picker, NSDictionary info)
@@ -68,8 +66,8 @@ namespace Plugin.Media
 
 			Dismiss(picker, () =>
 			{
-                if (mediaFile == null)
-                    tcs.SetException(new FileNotFoundException());
+				if (mediaFile == null)
+					tcs.SetException(new FileNotFoundException());
 				else
 					tcs.TrySetResult(new List<MediaFile> { mediaFile });
 			});
@@ -152,7 +150,7 @@ namespace Plugin.Media
 
 		private bool IsCaptured =>
 			source == UIImagePickerControllerSourceType.Camera;
-		
+
 		private void Dismiss(UINavigationController picker, NSAction onDismiss)
 		{
 			if (viewController == null)
@@ -281,8 +279,8 @@ namespace Plugin.Media
 		{
 			var image = (UIImage)info[UIImagePickerController.EditedImage] ?? (UIImage)info[UIImagePickerController.OriginalImage];
 
-            if (image == null)
-                return null;
+			if (image == null)
+				return null;
 
 			var path = GetOutputPath(MediaImplementation.TypeImage,
 				options.Directory ?? ((IsCaptured) ? string.Empty : "temp"),
@@ -356,6 +354,10 @@ namespace Plugin.Media
 
 							meta = newMeta;
 						}
+
+						if (options.FindLocation != null)
+							options.Location = await options.FindLocation?.Invoke();
+
 						var location = options.Location;
 						if (meta != null && location != null)
 						{

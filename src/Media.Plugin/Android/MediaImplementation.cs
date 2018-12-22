@@ -248,7 +248,9 @@ namespace Plugin.Media
 
 			try
 			{
-				options.Location = options.LocationAction?.Invoke();
+				if (options.FindLocation != null)
+					options.Location = await options.FindLocation?.Invoke();
+
 				var exif = new ExifInterface(media.Path);
 				ExifInterface exif1 = null;
 				if (options.SaveToAlbum)
